@@ -98,6 +98,17 @@ https://developers.google.com/maps/documentation/javascript/reference
 */
 var map;    // declares a global map variable
 
+function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
 
 /*
 Start here! initializeMap() is called when page is loaded.
@@ -105,9 +116,15 @@ Start here! initializeMap() is called when page is loaded.
 function initializeMap() {
 
   var locations;
+  //var uluru = {lat: -25.363, lng: 131.044};
+  var uluru = {lat: 12.972442, lng: 77.580643};
+
+
 
   var mapOptions = {
-    disableDefaultUI: true
+    disableDefaultUI: true,
+    zoom: 4,
+    center: uluru
   };
 
   /*
@@ -227,6 +244,7 @@ function initializeMap() {
 
   // locations is an array of location strings returned from locationFinder()
   locations = locationFinder();
+  console.log(locations);
 
   // pinPoster(locations) creates pins on the map for each location in
   // the locations array
@@ -234,16 +252,13 @@ function initializeMap() {
 
 }
 
-/*
-Uncomment the code below when you're ready to implement a Google Map!
-*/
 
 // Calls the initializeMap() function when the page loads
 //window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+  map.fitBounds(mapBounds);
+});

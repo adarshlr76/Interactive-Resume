@@ -27,10 +27,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
 
 
 
-  <!--
-  Uncomment the <script> tag below when you're ready to add an interactive Google Map to your resume!
-  -->
-<!-- <script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script> -->
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script> 
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
@@ -88,6 +85,11 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   -->
   <script src="js/jQuery.js"></script>
 
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByCcYA9bvlbP3HLK-0IhAb_Cwrp2nEGoc&callback=initializeMap">
+  </script>
+  
   <!-- More on helper.js in the class -->
   <script src="js/helper.js"></script>
 
@@ -144,5 +146,6 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       document.getElementById('mapDiv').style.display = 'none';
     }
   </script>
+
 </body>
 </html>

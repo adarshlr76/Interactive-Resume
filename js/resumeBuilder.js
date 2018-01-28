@@ -163,7 +163,12 @@ var projects = {
     }
 };
 
+function display_map() {
+	$("#mapDiv").append(googleMap);
+}
 bio.display();
 work.display();
 projects.display();
 education.display();
+$("#mapDiv").append(googleMap);
+//$("#mapDiv").append(map);
