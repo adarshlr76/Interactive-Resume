@@ -11,12 +11,46 @@
  	},
  	"welcomeMessage" : "",
  	"skills" : ["python", "c++", "C#", "HTML", "CSS", "MySQL", "Oracle"],
- 	"biopic" : "",
+ 	"bioPic": "images/Adarsh.jpg",
+ 	//"biopic" : "",
  	"display" : function () {
+ 		var formattedName = HTMLheaderName.replace("%data%", this.name);
+ 		var formattedRole = HTMLheaderRole.replace("%data%", this.role);
+ 		var fBioPic = HTMLbioPic.replace("%data%",this.bioPic);
+ 		var formattedContactGeneric = HTMLcontactGeneric.replace("%contact%",this.contacts.mobile);
+ 		var formattedMobile = HTMLmobile.replace("%data%",this.contacts.mobile);
+ 		var formattedEmail = HTMLemail.replace("%data%",this.contacts.email);
+ 		var fGitHub = HTMLgithub.replace("%data%",this.contacts.github);
+ 		var fLocation = HTMLlocation.replace("%data%",this.contacts.location);
+ 		var fWelcome = HTMLwelcomeMsg.replace("%data%", "Qualified IT professional with experience in solution development");
 
- 	}
+
+ 		$("#header").prepend(formattedRole);
+ 		$("#header").prepend(formattedName);
+
+
+
+		//$("#header ul").append(formattedContactGeneric);
+ 		$("#header ul").append(formattedMobile);
+ 		$("#header ul").append(formattedEmail);
+ 		$("#header ul").append(fGitHub);
+ 		$("#header ul").append(fLocation);
+ 		$("#header").append(fBioPic);
+ 		$("#header").append(fWelcome);
+ 		$("#header").append(HTMLskillsStart);
+
+ 		for (x=0;x < this.skills.length;x++) {
+ 			var fSkill = HTMLskills.replace("%data%",this.skills[x]);
+ 			$("#skills").append(fSkill);
+ 		}
+
+ 		
+
+
+    }
 
  };
+
 
 
 var education = {
@@ -36,6 +70,30 @@ var education = {
 		"url" : "www.udacity.com"
 	}],
 	display : function () {
+		$("#education").append(HTMLschoolStart);
+
+		for (i=0; i<this.schools.length; i++) {
+ 			var fSchool = HTMLschoolName.replace("%data%",this.schools[i].name);
+ 			var fDegree = HTMLschoolDegree.replace("%data%",this.schools[i].degree);
+ 			var fDates = HTMLschoolDates.replace("%data%",this.schools[i].dates);
+ 			var fLocation = HTMLschoolLocation.replace("%data%",this.schools[i].location);
+ 			var fMajors = HTMLschoolMajor.replace("%data%",this.schools[i].majors);
+ 			$(".education-entry:last").append( fSchool + fDegree );	
+ 			$(".education-entry:last").append( fDates);
+ 			$(".education-entry:last").append( fLocation);
+ 			$(".education-entry:last").append( fMajors);		
+		}
+
+		$(".education-entry:last").append(HTMLonlineClasses);
+		for (j=0; j < this.onlineCourses.length; j++) {
+ 			var fTitle = HTMLonlineTitle.replace("%data%",this.onlineCourses[j].title);
+ 			var fSchool = HTMLonlineSchool.replace("%data%",this.onlineCourses[j].school);
+ 			var fDates = HTMLonlineDates.replace("%data%",this.onlineCourses[j].dates);
+ 			var fUrl = HTMLonlineURL.replace("%data%",this.onlineCourses[j].location);
+ 			$(".education-entry:last").append( fTitle + fSchool );	
+ 			$(".education-entry:last").append( fDates);
+ 			$(".education-entry:last").append( fUrl);		
+		}
 
 	}
 };
@@ -44,19 +102,34 @@ var education = {
 var work = {
   "jobs" : [{
 	"employer" : " IIHT Ltd ",
-	"Title" : "IT Trainer",
+	"title" : "IT Trainer",
 	"location" : "bangalore",
 	"dates" : "2013-2016",
 	"description" : "Provided training on Java Hadoop"
 	},
 	{
 	"employer" : " IBM ",
-	"Title" : "Software developer",
+	"title" : "Software developer",
 	"location" : "bangalore",
 	"dates" : "2010-2012",
 	"description" : "Balanced warehouse tools developer"
 	}
-	]
+	],
+	display : function () {
+		$("#workExperience").append(HTMLworkStart);
+
+		for (i=0; i<this.jobs.length; i++) {
+ 			var fEmployer = HTMLworkEmployer.replace("%data%",this.jobs[i].employer);
+ 			var fTitle = HTMLworkTitle.replace("%data%",this.jobs[i].title);
+ 			var fDates = HTMLworkDates.replace("%data%",this.jobs[i].dates);
+ 			var fLocation = HTMLworkLocation.replace("%data%",this.jobs[i].location);
+ 			var fDesc = HTMLworkDescription.replace("%data%",this.jobs[i].description);
+ 			$(".work-entry:last").append( fEmployer + fTitle );	
+ 			$(".work-entry:last").append( fDates);
+ 			$(".work-entry:last").append( fLocation);
+ 			$(".work-entry:last").append( fDesc);		
+		}
+	}
 
 };
 
@@ -77,3 +150,7 @@ var projects = {
 	}
 	]	
 };
+
+bio.display();
+work.display();
+education.display();
