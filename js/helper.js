@@ -123,8 +123,8 @@ function initializeMap() {
 
   var mapOptions = {
     disableDefaultUI: true,
-    zoom: 4,
-    center: uluru
+    zoom: 6,
+    //center: uluru
   };
 
   /*
@@ -133,6 +133,7 @@ function initializeMap() {
   */
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
+  var geocoder = new google.maps.Geocoder();
 
   /*
   locationFinder() returns an array of every location string from the JSONs
@@ -195,6 +196,7 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      //infowindow.open(map,marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -224,18 +226,42 @@ function initializeMap() {
 
     // creates a Google place search service object. PlacesService does the work of
     // actually searching for location data.
-    var service = new google.maps.places.PlacesService(map);
+    //var service = new google.maps.places.PlacesService(map);
 
     // Iterates through the array of locations, creates a search object for each location
-      locations.forEach(function(place){
+    locations.forEach(function(place){
       // the search request object
-      var request = {
+      /*var request = {
         query: place
       };
 
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
-      service.textSearch(request, callback);
+      service.textSearch(request, callback);*/
+       geocodeAddress(place);
+        console.log(place);
+
+      
+    });
+  }
+
+  function geocodeAddress(address) {
+    //var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+
+        var marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: map
+        });
+  
+  //          document.getElementById('firstComponent').innerHTML="The Formatted Address is:"; // PUT STUFF HERE
+  //          document.getElementById('secondComponent').innerHTML="The Location is"; // PUT STUFF HERE
+      } else {
+  //          alert('Geocode was not successful for the following reason: ' + status);
+        console.log('Geocode was not successful for the following reason: ' + status);
+      }
     });
   }
 
@@ -244,7 +270,6 @@ function initializeMap() {
 
   // locations is an array of location strings returned from locationFinder()
   locations = locationFinder();
-  console.log(locations);
 
   // pinPoster(locations) creates pins on the map for each location in
   // the locations array

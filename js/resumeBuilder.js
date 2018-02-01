@@ -38,6 +38,12 @@ var bio = {
         $("#header").append(fWelcome);
         $("#header").append(HTMLskillsStart);
 
+        $("#footerContacts").append(formattedMobile);
+        $("#footerContacts").append(formattedEmail);
+        $("#footerContacts").append(fGitHub);
+        $("#footerContacts").append(fLocation);
+
+
         for (x = 0; x < this.skills.length; x++) {
             var fSkill = HTMLskills.replace("%data%", this.skills[x]);
             $("#skills").append(fSkill);
@@ -101,7 +107,7 @@ var work = {
     "jobs": [{
             "employer": " IIHT Ltd ",
             "title": "IT Trainer",
-            "location": "bangalore",
+            "location": "Mysore",
             "dates": "2013-2016",
             "description": "Provided training on Java Hadoop"
         },
@@ -163,9 +169,6 @@ var projects = {
     }
 };
 
-function display_map() {
-	$("#mapDiv").append(googleMap);
-}
 bio.display();
 work.display();
 projects.display();
